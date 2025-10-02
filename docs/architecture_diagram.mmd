@@ -1,0 +1,22 @@
+graph TD
+    User --> API_Gateway
+    API_Gateway --> Service_Discovery
+    API_Gateway --> Microservice_A
+    API_Gateway --> Microservice_B
+    Service_Discovery --> Microservice_A
+    Service_Discovery --> Microservice_B
+    Microservice_A --> Config_Server
+    Microservice_B --> Config_Server
+    Config_Server --> Git_Repository[Config Git Repository]
+
+    subgraph Microservices
+        Microservice_A[Microservice A]
+        Microservice_B[Microservice B]
+    end
+
+    style API_Gateway fill:#f9f,stroke:#333,stroke-width:2px
+    style Service_Discovery fill:#bbf,stroke:#333,stroke-width:2px
+    style Config_Server fill:#bfb,stroke:#333,stroke-width:2px
+    style Git_Repository fill:#fcf,stroke:#333,stroke-width:2px
+    style Microservice_A fill:#ccf,stroke:#333,stroke-width:2px
+    style Microservice_B fill:#ccf,stroke:#333,stroke-width:2px

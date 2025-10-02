@@ -1,40 +1,218 @@
-# Projeto Dio Experts Config
+# Construindo um Projeto com Arquitetura Baseada em Microsserviços Usando Spring Cloud
 
-Este projeto demonstra como configurar uma arquitetura de microsserviços usando Spring Cloud, Eureka, Config Server e API Gateway.
+![Hero Image](assets/hero_image.png)
 
-## Estrutura
+## 🇧🇷 Português
 
-- **Config Server**: Centraliza as configurações dos serviços.
-- **Service Discovery (Eureka)**: Registro e descoberta de microsserviços.
-- **API Gateway**: Entrada unificada para as requisições.
+## Visão Geral
 
-## Execução
+Este projeto demonstra a implementação de uma arquitetura de microsserviços robusta e escalável utilizando o ecossistema Spring Cloud. Ele serve como um guia prático para construir aplicações distribuídas, abordando conceitos essenciais como descoberta de serviços, configuração centralizada e roteamento de API.
 
-Cada módulo possui seu próprio `application.yml` com as portas e nomes definidos. Inicie os projetos na seguinte ordem:
+### Tecnologias Utilizadas
 
-1. **Config Server**
-2. **Service Discovery**
-3. **API Gateway**
-4. **Demais serviços (clientes)**
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-6DB33F?style=for-the-badge&logo=spring-cloud&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
+![Eureka](https://img.shields.io/badge/Eureka-FF6F00?style=for-the-badge&logo=eureka&logoColor=white)
+![API Gateway](https://img.shields.io/badge/API_Gateway-007ACC?style=for-the-badge&logo=amazon-api-gateway&logoColor=white)
+![Config Server](https://img.shields.io/badge/Config_Server-007ACC?style=for-the-badge&logo=spring&logoColor=white)
 
-Todos os arquivos `.yml` estão prontos para uso e podem ser customizados conforme sua organização.
+### Estrutura do Projeto
 
+O projeto é composto pelos seguintes módulos principais:
 
-## 📋 Descrição
+*   **`api-gateway`**: Atua como o ponto de entrada unificado para todos os clientes, roteando requisições para os microsserviços apropriados e fornecendo funcionalidades como autenticação e balanceamento de carga.
+*   **`config-server`**: Centraliza a gestão das configurações de todos os microsserviços, permitindo atualizações dinâmicas sem a necessidade de reiniciar as aplicações.
+*   **`service-discovery`**: Implementa o padrão de descoberta de serviços (Eureka Server), onde os microsserviços se registram e são descobertos por outros serviços e pelo API Gateway.
 
-Descreva aqui o conteúdo desta seção.
+### Diagrama de Arquitetura
 
+Abaixo está um diagrama que ilustra a arquitetura de microsserviços implementada neste projeto:
 
-## 📦 Instalação
+![Architecture Diagram](assets/architecture_diagram.png)
 
-Descreva aqui o conteúdo desta seção.
+### Pré-requisitos
 
+Para executar este projeto, você precisará ter instalado:
 
-## 💻 Uso
+*   Java Development Kit (JDK) 11 ou superior
+*   Maven 3.6.3 ou superior
+*   Docker (opcional, para conteinerização)
 
-Descreva aqui o conteúdo desta seção.
+### Como Executar
 
+Siga os passos abaixo para configurar e executar o projeto:
 
-## 📄 Licença
+1.  **Clonar o Repositório:**
 
-Descreva aqui o conteúdo desta seção.
+    ```bash
+    git clone https://github.com/galafis/Construindo-um-Projeto-com-Arquitetura-Baseada-em-Microsservi-os-Usando-Spring-Cloud.git
+    cd Construindo-um-Projeto-com-Arquitetura-Baseada-em-Microsservi-os-Usando-Spring-Cloud
+    ```
+
+2.  **Compilar o Projeto:**
+
+    Navegue até o diretório raiz do projeto e compile todos os módulos:
+
+    ```bash
+    mvn clean install
+    ```
+
+3.  **Iniciar os Microsserviços (em ordem):**
+
+    Abra terminais separados para cada microsserviço e inicie-os na seguinte ordem:
+
+    *   **Config Server:**
+
+        ```bash
+        cd src/config-server
+        mvn spring-boot:run
+        ```
+
+    *   **Service Discovery (Eureka Server):**
+
+        ```bash
+        cd src/service-discovery
+        mvn spring-boot:run
+        ```
+
+    *   **API Gateway:**
+
+        ```bash
+        cd src/api-gateway
+        mvn spring-boot:run
+        ```
+
+    *   **Outros Microsserviços (se houver):**
+
+        Inicie quaisquer outros microsserviços de negócio que você adicionar ao projeto.
+
+### Exemplos de Uso
+
+Após iniciar todos os serviços, você pode acessar:
+
+*   **Eureka Dashboard:** `http://localhost:8761`
+*   **Config Server:** `http://localhost:8888`
+*   **API Gateway:** `http://localhost:8080`
+
+Para testar o roteamento do API Gateway, você precisaria de um microsserviço de exemplo registrado no Eureka. Por exemplo, se você tivesse um serviço chamado `my-service`:
+
+`http://localhost:8080/my-service/api/data`
+
+### Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+### Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+
+---
+
+## 🇬🇧 English
+
+## Overview
+
+This project demonstrates the implementation of a robust and scalable microservices architecture using the Spring Cloud ecosystem. It serves as a practical guide to building distributed applications, covering essential concepts such as service discovery, centralized configuration, and API routing.
+
+### Technologies Used
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-6DB33F?style=for-the-badge&logo=spring-cloud&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
+![Eureka](https://img.shields.io/badge/Eureka-FF6F00?style=for-the-badge&logo=eureka&logoColor=white)
+![API Gateway](https://img.shields.io/badge/API_Gateway-007ACC?style=for-the-badge&logo=amazon-api-gateway&logoColor=white)
+![Config Server](https://img.shields.io/badge/Config_Server-007ACC?style=for-the-badge&logo=spring&logoColor=white)
+
+### Project Structure
+
+The project consists of the following main modules:
+
+*   **`api-gateway`**: Acts as the unified entry point for all clients, routing requests to the appropriate microservices and providing functionalities such as authentication and load balancing.
+*   **`config-server`**: Centralizes the management of configurations for all microservices, allowing dynamic updates without the need to restart applications.
+*   **`service-discovery`**: Implements the service discovery pattern (Eureka Server), where microservices register themselves and are discovered by other services and the API Gateway.
+
+### Architecture Diagram
+
+Below is a diagram illustrating the microservices architecture implemented in this project:
+
+![Architecture Diagram](assets/architecture_diagram.png)
+
+### Prerequisites
+
+To run this project, you will need to have the following installed:
+
+*   Java Development Kit (JDK) 11 or higher
+*   Maven 3.6.3 or higher
+*   Docker (optional, for containerization)
+
+### How to Run
+
+Follow the steps below to set up and run the project:
+
+1.  **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/galafis/Construindo-um-Projeto-com-Arquitetura-Baseada-em-Microsservi-os-Usando-Spring-Cloud.git
+    cd Construindo-um-Projeto-com-Arquitetura-Baseada-em-Microsservi-os-Usando-Spring-Cloud
+    ```
+
+2.  **Build the Project:**
+
+    Navigate to the project root directory and build all modules:
+
+    ```bash
+    mvn clean install
+    ```
+
+3.  **Start the Microservices (in order):**
+
+    Open separate terminals for each microservice and start them in the following order:
+
+    *   **Config Server:**
+
+        ```bash
+        cd src/config-server
+        mvn spring-boot:run
+        ```
+
+    *   **Service Discovery (Eureka Server):**
+
+        ```bash
+        cd src/service-discovery
+        mvn spring-boot:run
+        ```
+
+    *   **API Gateway:**
+
+        ```bash
+        cd src/api-gateway
+        mvn spring-boot:run
+        ```
+
+    *   **Other Microservices (if any):**
+
+        Start any other business microservices you add to the project.
+
+### Usage Examples
+
+After starting all services, you can access:
+
+*   **Eureka Dashboard:** `http://localhost:8761`
+*   **Config Server:** `http://localhost:8888`
+*   **API Gateway:** `http://localhost:8080`
+
+To test API Gateway routing, you would need an example microservice registered with Eureka. For instance, if you had a service named `my-service`:
+
+`http://localhost:8080/my-service/api/data`
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+### Contributions
+
+Contributions are welcome! Feel free to open issues and pull requests.
+
