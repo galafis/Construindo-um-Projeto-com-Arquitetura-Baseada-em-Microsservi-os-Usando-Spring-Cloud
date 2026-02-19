@@ -30,6 +30,51 @@ O projeto é composto pelos seguintes módulos principais:
 
 Abaixo está um diagrama que ilustra a arquitetura de microsserviços implementada neste projeto:
 
+```mermaid
+graph TD
+    Client(["👤 Cliente\n(Browser / App / REST Client)"])
+
+    subgraph Infrastructure ["Infraestrutura Spring Cloud"]
+        Gateway["🌐 API Gateway\n(Spring Cloud Gateway)\n:8080"]
+        Discovery["🔍 Service Discovery\n(Eureka Server)\n:8761"]
+        Config["⚙️ Config Server\n(Spring Cloud Config)\n:8888"]
+    end
+
+    subgraph Services ["Microsserviços de Negócio"]
+        SvcA["📦 Microservice A\n(Eureka Client)"]
+        SvcB["📦 Microservice B\n(Eureka Client)"]
+        SvcN["📦 Microservice N\n(Eureka Client)"]
+    end
+
+    Client -->|"HTTP Request"| Gateway
+    Gateway -->|"Resolve rota via registro"| Discovery
+    Gateway -->|"Encaminha requisição"| SvcA
+    Gateway -->|"Encaminha requisição"| SvcB
+    Gateway -->|"Encaminha requisição"| SvcN
+
+    SvcA -->|"Registra / Heartbeat"| Discovery
+    SvcB -->|"Registra / Heartbeat"| Discovery
+    SvcN -->|"Registra / Heartbeat"| Discovery
+
+    SvcA -->|"Busca configuração"| Config
+    SvcB -->|"Busca configuração"| Config
+    SvcN -->|"Busca configuração"| Config
+    Gateway -->|"Busca configuração"| Config
+
+    Config -.->|"Inicia antes de tudo"| Discovery
+    Discovery -.->|"Inicia antes do Gateway"| Gateway
+
+    style Client fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style Gateway fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style Discovery fill:#FF6F00,stroke:#b84f00,color:#fff
+    style Config fill:#007ACC,stroke:#005a9e,color:#fff
+    style SvcA fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style SvcB fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style SvcN fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style Infrastructure fill:#f0f4f8,stroke:#c0ccd8
+    style Services fill:#f0f9f0,stroke:#b0d4b0
+```
+
 ![Architecture Diagram](assets/architecture_diagram.png)
 
 ### Pré-requisitos
@@ -137,6 +182,51 @@ The project consists of the following main modules:
 ### Architecture Diagram
 
 Below is a diagram illustrating the microservices architecture implemented in this project:
+
+```mermaid
+graph TD
+    Client(["👤 Client\n(Browser / App / REST Client)"])
+
+    subgraph Infrastructure ["Spring Cloud Infrastructure"]
+        Gateway["🌐 API Gateway\n(Spring Cloud Gateway)\n:8080"]
+        Discovery["🔍 Service Discovery\n(Eureka Server)\n:8761"]
+        Config["⚙️ Config Server\n(Spring Cloud Config)\n:8888"]
+    end
+
+    subgraph Services ["Business Microservices"]
+        SvcA["📦 Microservice A\n(Eureka Client)"]
+        SvcB["📦 Microservice B\n(Eureka Client)"]
+        SvcN["📦 Microservice N\n(Eureka Client)"]
+    end
+
+    Client -->|"HTTP Request"| Gateway
+    Gateway -->|"Resolve route via registry"| Discovery
+    Gateway -->|"Forwards request"| SvcA
+    Gateway -->|"Forwards request"| SvcB
+    Gateway -->|"Forwards request"| SvcN
+
+    SvcA -->|"Register / Heartbeat"| Discovery
+    SvcB -->|"Register / Heartbeat"| Discovery
+    SvcN -->|"Register / Heartbeat"| Discovery
+
+    SvcA -->|"Fetch configuration"| Config
+    SvcB -->|"Fetch configuration"| Config
+    SvcN -->|"Fetch configuration"| Config
+    Gateway -->|"Fetch configuration"| Config
+
+    Config -.->|"Starts before everything"| Discovery
+    Discovery -.->|"Starts before Gateway"| Gateway
+
+    style Client fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    style Gateway fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style Discovery fill:#FF6F00,stroke:#b84f00,color:#fff
+    style Config fill:#007ACC,stroke:#005a9e,color:#fff
+    style SvcA fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style SvcB fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style SvcN fill:#6DB33F,stroke:#4a7c2a,color:#fff
+    style Infrastructure fill:#f0f4f8,stroke:#c0ccd8
+    style Services fill:#f0f9f0,stroke:#b0d4b0
+```
 
 ![Architecture Diagram](assets/architecture_diagram.png)
 
